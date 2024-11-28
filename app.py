@@ -2,9 +2,11 @@ import streamlit as st
 import pandas as pd
 import os
 
+# Carregar o arquivo Excel usando caminho relativo (arquivo no mesmo repositório)
+caminho_excel = "Controle Pendência AS BUILT (DUTOS) 2022 2 (1).xlsx"  # Substitua pelo nome real da sua planilha
+
 # Carregar o arquivo Excel
-caminho_excel = r"C:\Users\matheus.santos\OneDrive - Origem Energia\Arquivos de Chat do Microsoft Teams\Controle Pendência AS BUILT (DUTOS) 2022 2 (1).xlsx"
-df = pd.read_excel(caminho_excel, sheet_name="CAMINHOS_POÇOS", skiprows=2)  # pula as 3 primeiras linhas
+df = pd.read_excel(caminho_excel, sheet_name="CAMINHOS_POÇOS", skiprows=2)
 
 # Título do aplicativo
 st.title("Abrir Pastas dos Poços")
