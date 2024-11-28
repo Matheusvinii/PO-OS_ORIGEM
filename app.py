@@ -32,10 +32,16 @@ poco_selecionado = st.selectbox(
 
 # Abrir pasta ao clicar no botão
 if st.button("Abrir Pasta"):
-    # Obter o caminho correspondente ao poço selecionado
-    caminho_pasta = df.loc[df['POÇO'] == poco_selecionado, 'CAMINHO'].values[0]
-    if os.path.exists(caminho_pasta):
-        os.startfile(caminho_pasta)  # Abre a pasta no Windows Explorer
-        st.success(f"Pasta aberta: {caminho_pasta}")
-    else:
-        st.error(f"Caminho não encontrado: {caminho_pasta}")
+    try:
+        # Obter o caminho correspondente ao poço selecionado
+        caminho_pasta = df.loc[df['POÇO'] == poco_selecionado, 'CAMINHO'].values[0]
+        
+        # Verificar se o caminho é válido e está acessível na rede
+        if not os.path.exists(caminho_pasta):
+            st.error(f"Caminho não encontrado: {caminho_pasta}")
+        else:
+            # Abre a pasta no Windows Explorer (com caminho de rede)
+            os.startfile(caminho_pasta)
+            st.success(f"Pasta aberta: {caminho_pasta}")
+    except IndexError:
+        st.error("Erro ao encontrar o caminho do poço selecionado.")
